@@ -1,6 +1,8 @@
 package org.softkiss.testautomation.pageobject;
 
 import io.qameta.allure.Step;
+
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.softkiss.testautomation.client.ClientFactory;
 import org.softkiss.testautomation.client.ClientType;
 import org.softkiss.testautomation.environment.EnvironmentConfigurator;
+
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
@@ -24,7 +27,7 @@ import static java.lang.Thread.sleep;
 
 public class BasePage extends HtmlElement {
 
-    protected static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
+    protected static final Logger LOGGER = Logger.getLogger(BasePage.class);
     private RemoteWebDriver webDriver = ClientFactory.getInstance().getDriver();
     private WebDriverWait webDriverWait = new WebDriverWait(this.webDriver, ClientFactory.TIME_WAIT_SECONDS);
 
