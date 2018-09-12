@@ -1,13 +1,14 @@
 package org.softkiss.testautomation.web;
 
 import io.qameta.allure.Story;
-import org.softkiss.testautomation.BaseTest;
-import org.softkiss.testautomation.client.model.ItemOrder;
-import org.softkiss.testautomation.pageobject.WallmartLandingPage;
-import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.softkiss.testautomation.BaseTest;
+import org.softkiss.testautomation.model.ItemOrder;
+import org.softkiss.testautomation.pageobject.WallmartLandingPage;
+import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 

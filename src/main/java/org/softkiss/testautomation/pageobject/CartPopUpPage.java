@@ -1,14 +1,15 @@
 package org.softkiss.testautomation.pageobject;
 
 import io.qameta.allure.Step;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.softkiss.testautomation.client.model.ItemOrder;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.softkiss.testautomation.model.ItemOrder;
 
 public class CartPopUpPage extends BasePage {
 

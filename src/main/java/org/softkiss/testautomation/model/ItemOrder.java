@@ -1,4 +1,4 @@
-package org.softkiss.testautomation.client.model;
+package org.softkiss.testautomation.model;
 
 import java.util.Objects;
 
