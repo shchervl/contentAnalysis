@@ -1,10 +1,11 @@
 package org.softkiss.testautomation.client;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.slf4j.LoggerFactory;
 import org.softkiss.testautomation.environment.EnvironmentConfigurator;
 
 import java.net.MalformedURLException;
@@ -17,7 +18,8 @@ public class ClientFactory {
     public static final int TIME_WAIT_SECONDS = 5;
     private static final int SCRIPT_TIME_OUT_WAIT_SECONDS = 3 * 60;
     private static final int PAGE_LOAD_TIME_WAIT_SECONDS = 10 * 60;
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ClientFactory.class);
+
+    private static final Logger LOGGER = Logger.getLogger(ClientFactory.class);
     protected static EnvironmentConfigurator environmentConfigurator;
     private static ClientFactory instance = new ClientFactory();
 

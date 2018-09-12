@@ -2,15 +2,16 @@ package org.softkiss.testautomation.environment;
 
 import groovy.util.ConfigObject;
 import groovy.util.ConfigSlurper;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class EnvironmentConfigurator {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(EnvironmentConfigurator.class);
+    private static final Logger LOGGER = Logger.getLogger(EnvironmentConfigurator.class);
     private static volatile EnvironmentConfigurator environmentConfigurator;
     private static Properties properties = new Properties();
 

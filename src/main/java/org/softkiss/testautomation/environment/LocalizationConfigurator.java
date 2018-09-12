@@ -1,5 +1,6 @@
 package org.softkiss.testautomation.environment;
 
+import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.Properties;
  * Created by v.shcherbanyuk on 3/11/2015.
  */
 public class LocalizationConfigurator {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(LocalizationConfigurator.class);
+    private static final Logger LOGGER = Logger.getLogger(LocalizationConfigurator.class);
     private static volatile LocalizationConfigurator localizationConfigurator;
     private static Properties properties = new Properties();
 
