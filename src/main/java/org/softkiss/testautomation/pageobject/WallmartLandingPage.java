@@ -1,5 +1,6 @@
 package org.softkiss.testautomation.pageobject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.softkiss.testautomation.client.ClientFactory;
@@ -17,11 +18,13 @@ public class WallmartLandingPage extends BasePage {
         super();
     }
 
+    @Step
     public WallmartLandingPage openPage() {
         ClientFactory.getInstance().getDriver().get(EnvironmentConfigurator.getInstance().getAppUrl());
         return this;
     }
 
+    @Step
     public SearchResultsPage searchForGood(String goodName) {
         sendKeys(inputHeadSearch, goodName);
         buttonSearch.click();

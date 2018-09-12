@@ -57,7 +57,7 @@ public class ClientFactory {
             if (environmentConfigurator.isGridUsed()) {
                 webDriver.setFileDetector(new LocalFileDetector());
             }
-            webDriver.manage().window().maximize();
+            webDriver.manage().window().fullscreen();
             webDriver.manage().deleteAllCookies();
             webDriver.manage().timeouts().setScriptTimeout(SCRIPT_TIME_OUT_WAIT_SECONDS, SECONDS);
             webDriver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIME_WAIT_SECONDS, SECONDS);
