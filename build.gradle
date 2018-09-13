@@ -1,6 +1,27 @@
 import groovy.transform.Field
 
-apply plugin: "java"
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath "io.qameta.allure:allure-gradle:2.3"
+	}
+}
+
+plugins {
+	id "io.qameta.allure" version "2.5"
+	id 'java'
+}
+
+allure {
+	version = '2.2.1'
+	autoconfigure = true
+	aspectjweaver = true
+	allureJavaVersion = '1.3.9'
+}
+
+
 
 @Field systemPropertySet
 
@@ -11,7 +32,7 @@ defaultTasks 'clean', 'test'
 version = '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 configurations {
@@ -20,72 +41,71 @@ configurations {
 
 dependencies {
 
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
-    compile group: 'ru.yandex.qatools.htmlelements', name: 'htmlelements-java', version: '1.19'
-    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
+	compile group: 'ru.yandex.qatools.htmlelements', name: 'htmlelements-java', version: '1.19'
+	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
 
-    compile group: 'org.grails', name: 'grails-core', version: '3.3.3'
+	compile group: 'org.grails', name: 'grails-core', version: '3.3.3'
 
-    compile group: 'org.testng', name: 'testng', version: '6.14.3'
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    compile group: 'org.json', name: 'json', version: '20180813'
+	compile group: 'org.testng', name: 'testng', version: '6.14.3'
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile group: 'org.json', name: 'json', version: '20180813'
 
-    compile group: 'io.qameta.allure', name: 'allure-testng', version: '2.7.0'
-    agent group: 'org.aspectj', name: ' aspectjweaver', version: '1.8.10'
+	compile group: 'org.apache.poi', name: 'poi', 'version': '3.15'
+	compile group: 'org.apache.poi', name: 'poi-ooxml', 'version': '3.15'
+
+	compile group: 'io.qameta.allure', name: 'allure-testng', version: '2.7.0'
+	agent group: 'org.aspectj', name: ' aspectjweaver', version: '1.8.10'
 
 }
 
 loadConfiguration()
 
 sourceSets {
-    main {
-        resources {
-            srcDir 'src/main/resources'
-        }
-    }
-    test {
-        resources {
-            srcDir 'src/test/resources'
-        }
-    }
+	main {
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
 }
 
-//test.doFirst {
-//    //this provides ability to get screen shots by allure
-//    jvmArgs "-javaagent:${configurations.agent.singleFile}"
-//
-//}
-
 test {
-    useTestNG {
-        systemProperties(System.getProperties() + systemPropertySet)
-        println(System.getProperties())
-        options.suites(System.getProperty('suite'))
-    }
+	useTestNG {
+		systemProperties(System.getProperties() + systemPropertySet)
+		println(System.getProperties())
+		options.suites(System.getProperty('suite'))
+	}
 }
 
 def loadConfiguration() {
 
-    //specify common sytem properties
-    System.setProperty('env', hasProperty('env') ? env : 'prod')
-    System.setProperty('client', hasProperty('client') ? client : 'gc')
-    System.setProperty('i18n', hasProperty('i18n') ? i18n : 'en')
-    System.setProperty('testLinkReport', hasProperty('testLinkReport') ? testLinkReport : 'false')
-    System.setProperty('suite', 'src/test/resources/suite/' + (hasProperty('suite') ? suite : 'testng_bvt.xml').toString())
+	//specify common sytem properties
+	System.setProperty('env', hasProperty('env') ? env : 'prod')
+	System.setProperty('client', hasProperty('client') ? client : 'gc')
+	System.setProperty('i18n', hasProperty('i18n') ? i18n : 'en')
+	System.setProperty('testLinkReport', hasProperty('testLinkReport') ? testLinkReport : 'false')
+	System.setProperty('suite', 'src/test/resources/suite/' + (hasProperty('suite') ? suite : 'testng_bvt.xml').toString())
 
-    //specify env specific properties from config file
-    def configFile = file('config.groovy')
-    def configProperties = new ConfigSlurper(System.getProperty('env')).parse(configFile.toURI().toURL())
+	//specify env specific properties from config file
+	def configFile = file('config.groovy')
+	def configProperties = new ConfigSlurper(System.getProperty('env')).parse(configFile.toURI().toURL())
 
-    //defines if url specified and override it
-    def envUrl = (hasProperty('url') && getProperty('url') != "" ? url : configProperties.getProperty('url'))
-    configProperties.setProperty('url', envUrl)
+	//defines if url specified and override it
+	def envUrl = (hasProperty('url') && getProperty('url') != "" ? url : configProperties.getProperty('url'))
+	configProperties.setProperty('url', envUrl)
 
-    //defines if tenant specified and override it
-    def envTenant = (hasProperty('tenant') && getProperty('tenant') != "" ? tenant : configProperties.getProperty('tenant'))
-    configProperties.setProperty('tenant', envTenant)
+	//defines if tenant specified and override it
+	def envTenant = (hasProperty('tenant') && getProperty('tenant') != "" ? tenant : configProperties.getProperty('tenant'))
+	configProperties.setProperty('tenant', envTenant)
 
-    //magic that adds new properties w/o overriding existent ones
-    systemPropertySet = System.getProperties() + configProperties.toProperties()
-    System.setProperties(systemPropertySet)
+	//magic that adds new properties w/o overriding existent ones
+	systemPropertySet = System.getProperties() + configProperties.toProperties()
+	System.setProperties(systemPropertySet)
 }
+
+

@@ -6,4 +6,9 @@
             <class name="org.softkiss.testautomation.web.TestWallMartAddGoodToCart"/>
         </classes>
     </test>
+    <test name="Excel spread sheet functionality">
+        <classes>
+            <class name="org.softkiss.testautomation.web.TestExcelFileAnalysis"/>
+        </classes>
+    </test>
 </suite>

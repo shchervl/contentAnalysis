@@ -1,5 +1,6 @@
 package org.softkiss.testautomation.web;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 
+@Feature("Managing orders in cart")
 public class TestWallMartAddGoodToCart extends BaseTest {
 
 
